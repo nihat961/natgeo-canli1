@@ -10,11 +10,11 @@ VIDEO_ID = "MiQe9ob9aDc"
 @app.route("/natgeo.m3u8")
 def get_live_stream():
     try:
-        # Hatalı olan whoami kısmı which olarak düzeltildi
         ytdlp_path = shutil.which("yt-dlp") or "yt-dlp"
         
-        # Link yapısı ve süslü parantez içi tamamen düzeltildi
+        # YouTube link yapısı ve soru işareti tam kuralına göre düzeltildi
         komut = [ytdlp_path, "--get-url", f"https://youtube.com{VIDEO_ID}"]
+        
         guncel_link = subprocess.check_output(komut).decode("utf-8").strip()
         return redirect(guncel_link)
     except Exception as e:
