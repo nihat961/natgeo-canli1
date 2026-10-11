@@ -4,14 +4,17 @@ from flask import Flask, redirect
 
 app = Flask(__name__)
 
-# National Geographic Animals Canlı Yayın Kimliği (aDc tam haliyle eklendi)
+# National Geographic Animals Canlı Yayın Kimliği
 VIDEO_ID = "MiQe9ob9aDc"
 
 @app.route("/natgeo.m3u8")
 def get_live_stream():
     try:
-        ytdlp_path = shutil.whoami("yt-dlp") or "yt-dlp"
-        komut = [ytdlp_path, "--get-url", f"https://www.youtube.com/watch?v=MiQe9ob9aDc"]
+        # Hatalı olan whoami kısmı which olarak düzeltildi
+        ytdlp_path = shutil.which("yt-dlp") or "yt-dlp"
+        
+        # Link yapısı ve süslü parantez içi tamamen düzeltildi
+        komut = [ytdlp_path, "--get-url", f"https://youtube.com{VIDEO_ID}"]
         guncel_link = subprocess.check_output(komut).decode("utf-8").strip()
         return redirect(guncel_link)
     except Exception as e:
