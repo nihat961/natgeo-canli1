@@ -12,8 +12,13 @@ def get_live_stream():
     try:
         ytdlp_path = shutil.which("yt-dlp") or "yt-dlp"
         
-        # YouTube link yapısı ve soru işareti tam kuralına göre düzeltildi
-        komut = [ytdlp_path, "--get-url", f"https://youtube.com{VIDEO_ID}"]
+        # YouTube bot engelini kıran tarayıcı taklidi (User-Agent) komuta eklendi
+        komut = [
+            ytdlp_path, 
+            "--get-url", 
+            "--user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            f"https://youtube.com{VIDEO_ID}"
+        ]
         
         guncel_link = subprocess.check_output(komut).decode("utf-8").strip()
         return redirect(guncel_link)
