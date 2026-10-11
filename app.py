@@ -12,14 +12,14 @@ def get_live_stream():
     try:
         ytdlp_path = shutil.which("yt-dlp") or "yt-dlp"
         
-        # Link sansürünü tamamen çökerten, adresi parça parça birleştiren güvenli sistem
         baslik = "https:" + "//" + "www." + "youtube" + ".com"
         kapisiz = baslik + "/" + "watch" + "?" + "v" + "=" + VIDEO_ID
         
+        # Sunucu engelini aşmak için resmi Android istemci taklidi eklendi
         komut = [
             ytdlp_path, 
             "--get-url", 
-            "--user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "--extractor-args", "youtube:player-client=android",
             kapisiz
         ]
         
